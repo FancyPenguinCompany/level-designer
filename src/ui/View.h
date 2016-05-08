@@ -4,6 +4,7 @@
 #include <windows.h>
 #include <MainWindow.h>
 #include <memory>
+#include "Renderer.h"
 
 namespace ui {
 
@@ -23,7 +24,10 @@ private:
     static std::unique_ptr<View> instance_;
 
     MainWindow mainWindow_;
+    renderer::Renderer renderer_;
     bool isRunning_;
+
+    void querryMessages();
 
 };
 

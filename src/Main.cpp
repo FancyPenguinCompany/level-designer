@@ -1,10 +1,11 @@
+#include <cassert>
 #include <memory>
 #include "View.h"
-#include "MessageHandler.h"
 
 int main()
 {
-    ui::View::getInstance()->run();
+    ui::View* view = ui::View::getInstance();
+    assert(view != nullptr);
+    view->run();
     ui::View::freeInstance();
-    ui::MessageHandler::freeInstance();
 }

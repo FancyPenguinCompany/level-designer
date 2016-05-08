@@ -1,5 +1,4 @@
 #include "View.h"
-#include "MessageHandler.h"
 
 namespace ui {
 
@@ -24,11 +23,17 @@ void View::run()
     isRunning_ = true;
     while (isRunning_)
     {
-        MSG msg;
-        PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE);
-        TranslateMessage(&msg);
-        DispatchMessage(&msg);
+        querryMessages();
+        renderer_.render();
     }
+}
+
+void View::querryMessages()
+{
+    MSG msg;
+    PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE);
+    TranslateMessage(&msg);
+    DispatchMessage(&msg);
 }
 
 void View::stop()
@@ -37,7 +42,3 @@ void View::stop()
 }
 
 }
-
-
-
-

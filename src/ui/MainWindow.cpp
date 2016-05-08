@@ -1,5 +1,5 @@
 #include "MainWindow.h"
-#include "MessageHandler.h"
+#include "View.h"
 
 namespace ui {
 
@@ -16,7 +16,7 @@ void MainWindow::initialize()
     // Register window class
     winClass.cbSize = sizeof(WNDCLASSEX);
     winClass.style = CS_HREDRAW | CS_VREDRAW;
-    winClass.lpfnWndProc = MessageHandler::getInstance()->handleMessage;
+    winClass.lpfnWndProc = handleMessage;
     winClass.hInstance = hInstance_;
     winClass.hCursor = LoadCursor(nullptr, IDC_ARROW);
     winClass.lpszClassName = WINDOW_CLASS;
@@ -39,8 +39,24 @@ void MainWindow::initialize()
                            nullptr,
                            hInstance_,
                            nullptr);
+
     SetForegroundWindow(hwnd_);
     SetWindowLongPtr(hwnd_, GWLP_USERDATA, (LONG_PTR)this);
+}
+
+LRESULT CALLBACK MainWindow::handleMessage(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+    LRESULT result = 0;
+
+    switch (uMsg)
+    {
+    case WM_DESTROY:
+        View::getInstance()->stop();
+
+    default:
+        result = DefWindowProc(hwnd, uMsg, wParam, lParam);
+    }
+    return result;
 }
 
 }
