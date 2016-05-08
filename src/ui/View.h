@@ -11,11 +11,13 @@ namespace ui {
 class View
 {
 public:
-    View() = default; 
+    View(); 
     ~View() = default;
 
     static View* getInstance();
     static void freeInstance();
+
+    inline HWND getMainWindowHandle();
 
     void run();
     void stop();
@@ -30,6 +32,11 @@ private:
     void querryMessages();
 
 };
+
+inline HWND View::getMainWindowHandle()
+{
+    return mainWindow_.getHandle();
+}
 
 }
 #endif // VIEW_H

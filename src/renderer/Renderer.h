@@ -1,18 +1,29 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 
+#include <windows.h>
+
 namespace renderer {
 
 class Renderer
 {
 public:
-    Renderer() = default;
+    Renderer(HWND hwnd);
     ~Renderer() = default;
 
     void render();
 
 private:
+    Renderer() = default;
+
     void initialize();
+    void initOpenGLContext();
+    void setPixelFormat();
+    void createOpenGLContext();
+
+    HWND hwnd_;
+    HDC hdc_;
+    HGLRC hrc_;
 };
 
 }

@@ -10,15 +10,16 @@ add_executable(level-designer
     Main.cpp)
 
 include_directories(
-    ${CMAKE_SOURCE_DIR}/ext/glew/include
-)
+    ${CMAKE_SOURCE_DIR}/ext/glew/include)
 
 find_library(GLEW_LIBRARY 
     NAMES
     glew32 
     glew32s
     PATHS "${CMAKE_SOURCE_DIR}/ext/glew/lib"
-    NO_DEFAULT_PATH
-)
+    NO_DEFAULT_PATH)
+
+find_package(OpenGL)
 
 target_link_libraries(level-designer ${GLEW_LIBRARY})
+target_link_libraries(level-designer ${OPENGL_LIBRARIES})

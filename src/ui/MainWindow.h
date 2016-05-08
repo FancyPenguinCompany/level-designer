@@ -13,6 +13,8 @@ public:
     MainWindow();
     ~MainWindow() = default;
 
+    inline HWND getHandle();
+
 private:
     HINSTANCE hInstance_;
     HWND hwnd_;
@@ -28,6 +30,11 @@ private:
 
     void initialize();
 };
+
+inline HWND MainWindow::getHandle()
+{
+    return hwnd_;
+}
 
 }
 

@@ -13,6 +13,11 @@ View* View::getInstance()
     return instance_.get();
 }
 
+View::View()
+    : renderer_(mainWindow_.getHandle())
+{
+}
+
 void View::freeInstance()
 {
     instance_ = nullptr;
